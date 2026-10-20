@@ -94,6 +94,10 @@ See [[concepts/Decision_Log]] for full log.
 | D009 | Billing weight: 1/log(ordering+1) over 1/ordering | 2026-10-20 |
 | D010 | Min vote threshold: configurable, default 500 | 2026-10-20 |
 | D011 | Hit metric: two-mode (Full with ROI, Partial without) | 2026-10-20 |
+| D012 | Package manager: UV over requirements.txt | 2026-10-20 |
+| D013 | GitHub repo: private at sempaiyael/gcash_assessment | 2026-10-20 |
+| D014 | isAdult filter: exclude adult content (stakeholder discussion point) | 2026-10-20 |
+| D015 | Technical lead grilling practice: challenge plans before execution | 2026-10-20 |
 
 ## Naming Conventions
 

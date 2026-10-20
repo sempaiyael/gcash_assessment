@@ -116,3 +116,17 @@ Chronological record of key project decisions. Reference IDs (D001, D002...) for
 - **Rationale**: Private = control over who sees it. Share link directly with hiring managers. GitHub is industry standard.
 - **Auth**: HTTPS + Personal Access Token (classic), scopes: `repo`
 - **Status**: Accepted
+
+## D014: isAdult Filter — Exclude Adult Content
+- **Date**: 2026-10-20
+- **Decision**: Filter `isAdult` to valid values (0 or 1), then exclude adult content (isAdult == 1)
+- **Alternatives**: Drop column entirely, keep all content
+- **Rationale**: Adult content (3.3% of dataset) not relevant for mainstream movie studio recommendation. Also fixes corrupt data (year values mixed into isAdult column).
+- **Stakeholder discussion point**: "We excluded adult content as it's not relevant for mainstream movie studio recommendations. This could be discussed with stakeholders as a data cleaning decision."
+- **Status**: Accepted
+
+## D015: Technical Lead Grilling Practice
+- **Date**: 2026-10-20
+- **Decision**: Actively grill implementation plans before execution — challenge assumptions, identify conflicts with requirements, and propose better alternatives
+- **Rationale**: Prevents wasted effort on approaches that would break downstream requirements. Example: caught 2023-only filter that would have made Q3, Q4, and Day 2 impossible.
+- **Status**: Accepted — will apply to all future planning
