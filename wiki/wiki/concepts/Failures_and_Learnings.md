@@ -41,6 +41,13 @@ Real-time record of mistakes and lessons. Prevents repeating errors across sessi
 - **Lesson**: Don't filter dataset to only budget-available movies — would lose 98% of data. Use partial formula for movies without financials.
 - **Mitigation**: Two-mode hit metric (D011). Major releases (our target) have better coverage.
 
+### F004: GitHub HTTPS Auth Failure — Token Required
+- **What**: `git push` failed with "Invalid username or token. Password authentication is not supported for Git operations."
+- **Root cause**: GitHub deprecated password auth for git operations in 2021. Must use Personal Access Token (PAT) or SSH.
+- **Impact**: ~5 minutes to resolve. Generated PAT at github.com/settings/tokens with `repo` scope.
+- **Lesson**: For GitHub HTTPS, always use Personal Access Token as password. Or use `gh auth login` for browser-based auth.
+- **Fix**: Generate PAT at https://github.com/settings/tokens (classic), scopes: `repo`. Use token as password when git prompts.
+
 ## Known Pitfalls (Pre-mortem + Validated)
 
 | Pitfall | Prevention | Status |
@@ -54,3 +61,4 @@ Real-time record of mistakes and lessons. Prevents repeating errors across sessi
 | FT-Transformer overfits on small data | Use early stopping, dropout, regularization | Pending |
 | Kaggle datasets vary wildly in quality | Verify row count, null %, key columns before committing | Validated (F002) |
 | Budget/revenue data is sparse for movies | Design hit metric to work without financial data (D011) | Validated (F003) |
+| GitHub HTTPS requires token, not password | Generate PAT at github.com/settings/tokens with `repo` scope | Validated (F004) |

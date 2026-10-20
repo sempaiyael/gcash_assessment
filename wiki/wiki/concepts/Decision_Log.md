@@ -98,3 +98,21 @@ Chronological record of key project decisions. Reference IDs (D001, D002...) for
 - **Rationale**: Only 1.2% of TMDb data has both budget and revenue. Two-mode approach avoids losing 98% of dataset. Movies without ROI use partial formula. Weights are placeholders — finalize during EDA.
 - **Stakeholder note**: ROI is retrospective — it defines what IS a hit, not what we predict. Missing ROI at prediction time is acceptable.
 - **Status**: Accepted (weights TBD during EDA)
+
+## D012: Package Manager — UV over requirements.txt
+- **Date**: 2026-10-20
+- **Decision**: Use UV (Astral) as package manager instead of pip + requirements.txt
+- **Alternatives**: pip + requirements.txt, poetry, conda
+- **Rationale**: UV is faster (Rust-based), creates lockfile for reproducibility, manages Python versions, auto-creates .venv, single tool for env + deps
+- **Tradeoffs**: Newer tool, less community examples. But uv.lock + pyproject.toml is the modern standard.
+- **Setup**: `uv init --python 3.12 --no-package` then `uv add pandas numpy matplotlib seaborn pyarrow jupyter`
+- **Files created**: pyproject.toml, uv.lock, .python-version, .venv/
+- **Status**: Accepted
+
+## D013: GitHub Repository — Private
+- **Date**: 2026-10-20
+- **Decision**: Create private GitHub repo at `https://github.com/sempaiyael/gcash_assessment`
+- **Alternatives**: Public repo, GitLab, no remote
+- **Rationale**: Private = control over who sees it. Share link directly with hiring managers. GitHub is industry standard.
+- **Auth**: HTTPS + Personal Access Token (classic), scopes: `repo`
+- **Status**: Accepted

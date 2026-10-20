@@ -32,8 +32,8 @@ Background, skills, and constraints for the project owner. Use this to calibrate
 ## Timeline
 
 - **Total**: 3 days
-- **Day 1**: 2026-10-19 (today)
-- **Deadline**: 2026-10-21
+- **Day 1**: 2026-10-20 (today)
+- **Deadline**: 2026-10-22
 
 ## Constraints
 

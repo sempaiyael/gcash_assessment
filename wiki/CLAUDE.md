@@ -64,16 +64,18 @@ Every new session MUST:
 
 ## Current Project State
 
-- **Phase**: Day 1 execution — data loading and EDA
+- **Phase**: Day 1 execution — notebooks created, need to run and verify
 - **Timeline**: 3 days (Day 1 = 2026-10-20)
+- **GitHub**: https://github.com/sempaiyael/gcash_assessment (private, D013)
+- **Package Manager**: UV (pyproject.toml + uv.lock, D012)
 - **Primary Model**: FT-Transformer (NeurIPS 2021)
 - **Baselines**: Logistic Regression, XGBoost, TabNet
 - **Bonus Model**: SVD++ recommender
-- **Data**: IMDb (5 TSV files downloaded), TMDb via Kaggle (alanvourch dataset, D007)
+- **Data**: IMDb (5 TSV files in source_data/), TMDb via Kaggle (alanvourch dataset, D007)
 - **Data quality**: Verified — 1.26M TMDb rows, budget/revenue sparse but sufficient for major releases
 - **Presentation**: Executive slides for movie studio management
 - **Wiki**: 27 concept pages, 5 entity pages, 2 day logs
-- **Next action**: Create notebooks for data loading and EDA
+- **Next action**: Run notebooks to verify they work, review EDA output, commit and push
 
 ## Key Decisions
 
