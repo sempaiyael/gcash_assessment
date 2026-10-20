@@ -130,3 +130,27 @@ Chronological record of key project decisions. Reference IDs (D001, D002...) for
 - **Decision**: Actively grill implementation plans before execution — challenge assumptions, identify conflicts with requirements, and propose better alternatives
 - **Rationale**: Prevents wasted effort on approaches that would break downstream requirements. Example: caught 2023-only filter that would have made Q3, Q4, and Day 2 impossible.
 - **Status**: Accepted — will apply to all future planning
+
+## D016: Hit Metric Binary Label — 90th Percentile Threshold
+- **Date**: 2026-10-20
+- **Decision**: Binary hit/not-hit label uses 90th percentile (top 10%) of hit scores as threshold
+- **Alternatives**: Fixed threshold (e.g., 0.7), top 20% (80th percentile)
+- **Rationale**:
+  - Industry realism: ~10% of movies are genuine hits (high ROI + high audience reach)
+  - Class balance: ~7,100 hits out of ~71K movies = enough positive examples while keeping realistic imbalance
+  - Statistical convention: 90th percentile is standard in anomaly detection and rare event prediction
+  - Clarity: "We predict the top 10% of movies" is easy to explain to stakeholders
+- **Implementation**: Threshold computed on training set only (avoid data leakage)
+- **Status**: Accepted
+
+## D017: Temporal Split — Train ≤2018, Test 2019-2023
+- **Date**: 2026-10-20
+- **Decision**: Train on movies ≤2018, test on movies 2019-2023 (5-year holdout)
+- **Alternatives**: Train ≤2020 (3-year holdout), random 80/20 split
+- **Rationale**:
+  - Realistic simulation: Mimics real-world scenario (train on past, predict future)
+  - No data leakage: Model never sees future data during training
+  - Large holdout: 5 years of test data (~15K movies) = robust evaluation
+  - Covers COVID: 2020-2021 had unusual patterns (theater closures, streaming boom). Tests generalization to disruptions.
+  - Recent trends: Test set includes 2023 (most recent data), so we evaluate on current patterns.
+- **Status**: Accepted

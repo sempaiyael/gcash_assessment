@@ -11,6 +11,27 @@ tags: [requirements, deliverables, scope]
 
 Structured checklist from the original email. Verify completion against this list.
 
+## Goal Clarification
+
+**The exact wording**: "Build a model to predict the next AAA title using the given data plus other data you may think would be predictive."
+
+**Interpretation**: This is NOT about generating a movie title (text generation). It's about **predicting whether a proposed movie will be a hit (AAA title) before it's made**.
+
+**The business scenario**:
+1. Studio has a movie proposal: "Sci-fi action film directed by Christopher Nolan, starring Tom Hardy, $200M budget."
+2. Director asks: "Will this be a hit? Should we invest?"
+3. Model takes greenlight-time features → outputs prediction: "Yes, likely a hit" or "No, risky."
+
+**What we're predicting**:
+- Target: Binary hit/not-hit (based on hit metric, 90th percentile threshold — D016)
+- Input: Greenlight-time features (what we know BEFORE production)
+- Output: Probability of being a hit (0 to 1)
+
+**What we're NOT doing**:
+- Generating movie titles (that's NLP/text generation)
+- Predicting exact box office revenue (that's regression)
+- Recommending what movie to make (that's the recommender system, bonus)
+
 ## Required Deliverables
 
 ### EDA (4 Questions)

@@ -48,6 +48,13 @@ Real-time record of mistakes and lessons. Prevents repeating errors across sessi
 - **Lesson**: For GitHub HTTPS, always use Personal Access Token as password. Or use `gh auth login` for browser-based auth.
 - **Fix**: Generate PAT at https://github.com/settings/tokens (classic), scopes: `repo`. Use token as password when git prompts.
 
+### F005: runtimeMinutes Stored as String
+- **What**: `runtimeMinutes` column in `movies_clean.parquet` was stored as `str` instead of `int`. Caused errors when computing averages.
+- **Root cause**: IMDb TSV stores runtime as string (e.g., "95", "120"). Pandas didn't auto-convert due to `\N` null values.
+- **Impact**: ~2 minutes to fix. User manually cast to int in notebook 02.
+- **Fix**: `movies['runtimeMinutes'] = movies['runtimeMinutes'].fillna(0).astype(int)`
+- **Prevention**: Add dtype conversion to `load_imdb_tsv()` helper for all numeric columns.
+
 ## Known Pitfalls (Pre-mortem + Validated)
 
 | Pitfall | Prevention | Status |

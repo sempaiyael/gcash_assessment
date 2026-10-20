@@ -64,18 +64,21 @@ Every new session MUST:
 
 ## Current Project State
 
-- **Phase**: Day 1 execution — notebooks created, need to run and verify
-- **Timeline**: 3 days (Day 1 = 2026-10-20)
+- **Phase**: Day 1 complete — EDA done, notebooks verified. Ready for Day 2 (feature engineering + modeling).
+- **Timeline**: 3 days (Day 1 = 2026-10-20, Deadline = 2026-10-22)
 - **GitHub**: https://github.com/sempaiyael/gcash_assessment (private, D013)
 - **Package Manager**: UV (pyproject.toml + uv.lock, D012)
-- **Primary Model**: FT-Transformer (NeurIPS 2021)
-- **Baselines**: Logistic Regression, XGBoost, TabNet
+- **Primary Model**: FT-Transformer (NeurIPS 2021, pytorch-tabular)
+- **Baselines**: Logistic Regression, XGBoost, TabNet (prioritize XGBoost)
 - **Bonus Model**: SVD++ recommender
-- **Data**: IMDb (5 TSV files in source_data/), TMDb via Kaggle (alanvourch dataset, D007)
-- **Data quality**: Verified — 1.26M TMDb rows, budget/revenue sparse but sufficient for major releases
-- **Presentation**: Executive slides for movie studio management
+- **Data**: IMDb (5 TSV files), TMDb via Kaggle (alanvourch dataset, D007)
+- **Data quality**: 71K movies after filtering, 250K actors, 5K directors
+- **EDA Results**: Q1-Q4 answered, visualizations saved to reports/figures/
+- **Hit Metric**: Two-mode (D011), binary label at 90th percentile (D016)
+- **Train/Test Split**: Train ≤2018, Test 2019-2023 (D017)
+- **Presentation**: Executive slides for movie studio management (defer to Day 3)
 - **Wiki**: 27 concept pages, 5 entity pages, 2 day logs
-- **Next action**: Run notebooks to verify they work, review EDA output, commit and push
+- **Next action**: Day 2 — feature engineering pipeline, then FT-Transformer + baselines
 
 ## Key Decisions
 
@@ -98,6 +101,8 @@ See [[concepts/Decision_Log]] for full log.
 | D013 | GitHub repo: private at sempaiyael/gcash_assessment | 2026-10-20 |
 | D014 | isAdult filter: exclude adult content (stakeholder discussion point) | 2026-10-20 |
 | D015 | Technical lead grilling practice: challenge plans before execution | 2026-10-20 |
+| D016 | Hit metric binary label: 90th percentile threshold | 2026-10-20 |
+| D017 | Temporal split: train ≤2018, test 2019-2023 | 2026-10-20 |
 
 ## Naming Conventions
 
