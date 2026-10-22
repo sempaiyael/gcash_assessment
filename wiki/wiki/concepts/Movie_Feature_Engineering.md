@@ -101,6 +101,27 @@ See [[concepts/Data_Sources]] for full API/source details.
 - Franchise: binary flag + prior installment performance
 - Budget: from Kaggle TMDb dataset (D007) — 14,669 movies with both budget+revenue
 
+## Leakage-Safe Implementation (Day 2, implemented)
+
+**Final inventory**: 76 greenlight-time features in `data/features.parquet`, built by `src/feature_engineering.py`:
+
+| Block | Features | Leakage note |
+|---|---|---|
+| As-of director | prior_films, prior_avg_hit, prior_avg_votes, years_since_debut/last, is_debut | prior years only (D020) |
+| As-of cast (top-3 billing) | cast_pop_sum/mean/max (D008/D009 weights), cast_prior_films/avg_hit, actor-director prior collabs | past credits only |
+| As-of company | company_prior_hit_max/mean, company_known (≥20-occurrence tokens) | comma-in-name hazard documented |
+| As-of franchise | prior_releases, prior_avg_hit, is_sequel (title markers + shared-title groups) | heuristic — misses "The Dark Knight"-style franchise entries |
+| Genre momentum | mean prior-year genre hit-rate | lag-1 by design |
+| Static | log_budget + has_budget, runtime (+missing), genre multi-hot + count, is_usa, n_countries, certification, n_writers, keyword_count + top-15 kw flags, month sin/cos, is_summer/is_holiday, language | budget = greenlight estimate (caveat below) |
+| Timing/language | from TMDb release_date + original_language (re-extracted, 692K rows) | 99.2% coverage |
+
+**Banned as features** (they define or feed the label): `averageRating`, `numVotes`, `revenue`, `popularity` (TMDb post-release), `hit_score` and all its components, full-history `actor_popularity`/`director_stats` parquets. Enforced by `leakage_audit()`.
+
+**Caveats to disclose**:
+- **`keyword_count`** is FT-T's top permutation feature. TMDb keyword tagging richness correlates with a film's eventual attention — a metadata-recognition bias, not pure greenlight signal. Available at greenlight (marketing teams tag titles) but should be flagged in slides; removable without hurting XGB.
+- **Budget** is *reported* budget (post-hoc), used as a greenlight *estimate* proxy — standard practice, slight optimism for big productions.
+- **Franchise heuristic** is title-based; misses franchise entries with distinct titles (Dark Knight ≠ Batman). Keyword/IP features would fix this.
+
 ## Related
 
 - [[concepts/Hit_Movie_Metric]] — what we're predicting

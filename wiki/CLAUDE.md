@@ -64,21 +64,21 @@ Every new session MUST:
 
 ## Current Project State
 
-- **Phase**: Day 1 complete — EDA done, notebooks verified. Ready for Day 2 (feature engineering + modeling).
+- **Phase**: Day 2 complete — features + models done. Ready for Day 3 (slides, polish, submission).
 - **Timeline**: 3 days (Day 1 = 2026-10-20, Deadline = 2026-10-22)
 - **GitHub**: https://github.com/sempaiyael/gcash_assessment (private, D013)
-- **Package Manager**: UV (pyproject.toml + uv.lock, D012)
-- **Primary Model**: FT-Transformer (NeurIPS 2021, pytorch-tabular)
-- **Baselines**: Logistic Regression, XGBoost, TabNet (prioritize XGBoost)
-- **Bonus Model**: SVD++ recommender
-- **Data**: IMDb (5 TSV files), TMDb via Kaggle (alanvourch dataset, D007)
-- **Data quality**: 71K movies after filtering, 250K actors, 5K directors
-- **EDA Results**: Q1-Q4 answered, visualizations saved to reports/figures/
-- **Hit Metric**: Two-mode (D011), binary label at 90th percentile (D016)
-- **Train/Test Split**: Train ≤2018, Test 2019-2023 (D017)
-- **Presentation**: Executive slides for movie studio management (defer to Day 3)
-- **Wiki**: 27 concept pages, 5 entity pages, 2 day logs
-- **Next action**: Day 2 — feature engineering pipeline, then FT-Transformer + baselines
+- **Package Manager**: UV (pyproject.toml + uv.lock, D012). pandas 2.3.3 pinned <3 (D018), torch 2.14.1+cu130
+- **Primary Model**: FT-Transformer (pytorch-tabular 1.2.0, GPU) — test ROC-AUC 0.863, PR-AUC 0.379 (best)
+- **Baselines**: XGBoost (ROC-AUC 0.865), Logistic Regression (0.857). TabNet dropped (D019)
+- **Bonus Model**: SVD++ recommender (not started — cut first if time tight)
+- **Data**: IMDb TSVs + TMDb Kaggle (D007). Modeling frame: 65,799 movies (2024+ dropped, D021)
+- **Features**: 76 greenlight-time features, as-of leakage-safe (D020) — src/feature_engineering.py
+- **Split**: fit ≤2015 / val 2016-2018 / test 2019-2023 (D022). P90 label = 0.5612 (D016)
+- **Results**: reports/tables/model_comparison.{csv,md}, reports/figures/model_*.png
+- **Precision story**: P@25=0.76 (FT-T, ~10x base rate); 90% precision unreachable (measured) → two-tier slate (D025)
+- **Presentation**: Executive slides for studio management (Day 3 priority)
+- **Wiki**: concept + entity pages, 3 day logs, results/precision/landscape documented
+- **Next action**: Day 3 — slides first, then 60-min TabPFN-2.5 experiment (D026), then bonus recommender if time
 
 ## Key Decisions
 
@@ -103,6 +103,15 @@ See [[concepts/Decision_Log]] for full log.
 | D015 | Technical lead grilling practice: challenge plans before execution | 2026-10-20 |
 | D016 | Hit metric binary label: 90th percentile threshold | 2026-10-20 |
 | D017 | Temporal split: train ≤2018, test 2019-2023 | 2026-10-20 |
+| D018 | Env anchored on pytorch-tabular: pandas<3, torch cu130 explicit index | 2026-10-22 |
+| D019 | TabNet dropped (FT-T is the novel slot; LR+XGB are the baselines) | 2026-10-22 |
+| D020 | Historical features as-of-year (shift(1)) — no future leakage | 2026-10-22 |
+| D021 | Drop 2024+ rows from modeling (strict D017 window, noisy labels) | 2026-10-22 |
+| D022 | Internal val: fit ≤2015 / val 2016-2018 (temporal, early stop + threshold) | 2026-10-22 |
+| D023 | Imbalance: loss weighting + F1 threshold tuned on val | 2026-10-22 |
+| D024 | FT-T: early stop on valid_loss; permutation importance (lib bugs F008/F011) | 2026-10-22 |
+| D025 | High precision = two-tier P@K slate + recalibration; no 90% threshold chase | 2026-10-22 |
+| D026 | Day 3: slides first, then 60-min TabPFN-2.5 experiment, then recommender | 2026-10-22 |
 
 ## Naming Conventions
 

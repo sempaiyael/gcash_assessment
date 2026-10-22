@@ -40,6 +40,43 @@ Key papers to reference:
 2. Shwartz-Ziv & Armon 2022 — "Tabular Data: Deep Learning is Not All You Need"
 3. Grinsztajn et al. 2022 — "Why Do Tree-Based Models Still Outperform Deep Learning?"
 
+## Day-2 Empirical Results (test 2019-2023, thresholds tuned on val)
+
+| Model | ROC-AUC | PR-AUC | F1 | Precision | Recall | Fit time |
+|---|---|---|---|---|---|---|
+| XGBoost | **0.865** | 0.368 | 0.402 | 0.366 | 0.446 | 4s |
+| FT-Transformer | 0.863 | **0.379** | **0.406** | 0.355 | **0.475** | 72 min |
+| Logistic Regression | 0.857 | 0.340 | 0.398 | 0.358 | 0.448 | 1s |
+
+Story: FT-Transformer and XGBoost are **statistically tied on ROC-AUC**; FT-T wins on **PR-AUC/F1/recall** — the business metrics at an 8% base rate (PR-AUC baseline = 0.08). LR is the interpretable floor.
+
+## Why FT-Transformer ≈ XGBoost (and why that's the correct outcome)
+
+If asked "why didn't FT-T dominate?" — answer with evidence, not excuses:
+
+1. **The ceiling is the features, not the model.** Only 0.008 AUC separates linear (0.857) from nonlinear (0.865). FT-T's value proposition = feature *interactions*; if interactions are weak it can only match trees, never beat them.
+2. **Wrong data regime for tabular DL.** 47K rows of hand-crafted aggregates. Gorishniy et al. claim "competitive with GBDTs", not superiority; Grinsztajn et al. 2022 show trees win on medium tabular data; DL scaling wins start ~100K+ rows or learned representations.
+3. **Our features are tree-native** — as-of counts/ratios/means are axis-aligned-split-friendly; trees handle skew + missing values for free.
+4. **Zero tuning budget**, and FT-T is high-variance (277K params) while XGB early-stopped at 190 trees.
+5. **Single seed** — 0.865 vs 0.863 is within noise. Honest claim: tie, with FT-T ahead on PR-AUC.
+6. **2025-26 literature confirms it** — on the NeurIPS'25 TabPFN v2 critical-difference diagram, FT-T sits mid-pack alongside TabR/XGB; the only category that consistently beats tuned GBDTs is tabular *foundation* models (TabPFN family), which target exactly our data size.
+
+## Expectation Anchor: 0.86 is strong at greenlight time
+
+Any published 0.95+ AUC on movie success uses **post-release signals** (opening weekend, audience scores) — banned by design (D002). We deliberately predict with pre-production information only. **0.86 with greenlight-only features is the honest product; 0.95 would imply leakage.**
+
+## The High-Precision Question (expected)
+
+"Can you make it 90% precise?" → No — and we measured it (see [[concepts/Classification_Metrics]]):
+- Val-threshold @90% precision transfers to test as precision 0.53-0.67 at ≤2% coverage; oracle ceiling on test = 90% only at ~1% recall
+- Root causes: 8% base rate (needs 11x likelihood ratio), greenlight features cap the top end, label noise (two-mode D011), weighted-loss score inflation (predicted 81% vs actual 37% in top decile)
+- **What we deliver instead**: precision@K slate — FT-T P@25 = 0.76 (~10x base rate), P@50 = 0.74; two-tier operating point (endorsement top-25 / review top-250) + recalibrated probabilities
+- Business framing: the studio minimizes *false greenlights* ($50-200M each) — the endorsement tier is exactly that tool, with honest recall disclosure
+
+## If Asked About TabPFN / Newer Models
+
+"We benchmarked the landscape: TabPFN-2.5 (Feb 2026) is the current SOTA for our regime (≤50K rows) — an in-context tabular foundation model reporting an 87% win rate over default XGBoost up to 100K samples. TabR (ICLR'24) retrieval-augmentation is thematically ideal for movies ('find films like this one, see how they did'). We time-boxed a TabPFN implementation attempt; FT-Transformer remained our motivated choice for theory depth." Full landscape: [[concepts/Novel_Algorithm_Comparison]].
+
 ## Related
 
 - [[concepts/FT_Transformer]] — the algorithm

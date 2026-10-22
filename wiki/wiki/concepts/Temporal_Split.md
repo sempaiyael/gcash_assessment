@@ -63,6 +63,26 @@ train = df[df['startYear'] < 2020]
 test = df[df['startYear'] >= 2020]
 ```
 
+## As-of Feature Computation (D020) — the part people forget
+
+Splitting the rows is not enough. **Historical features must also be temporal** — full-history aggregates (e.g., `actor_popularity.parquet` computed over all years) leak test-era outcomes into training features.
+
+**Pattern (implemented in `src/feature_engineering.py`)**: aggregate per (entity, year), then cumulate with `shift(1)`:
+
+```python
+dy = base.groupby(["entity", "startYear"]).agg(**specs)   # one row per entity-year
+cum = dy.groupby("entity")[col].cumsum()                   # running totals
+dy[f"{prefix}_prior_{col}"] = cum.groupby(dy["entity"]).shift(1)  # PRIOR years only
+```
+
+Merge back on (entity, startYear): every movie in year Y sees the same prior-year totals — strictly earlier releases only. Same-year releases are concurrent and correctly invisible to each other.
+
+**Spot check**: The Dark Knight (2008) sees Nolan's exactly 5 prior films (Following→Batman Begins) — not Interstellar (2014). A debut director gets `prior_films=0` + `is_debut=1`, not NaN-from-the-future.
+
+Applies to: director track record, cast star power (D008/D009 formula on *past* credits), company track record, franchise installments, genre trend momentum.
+
+**Audit**: `leakage_audit()` asserts banned columns (`averageRating`, `numVotes`, `revenue`, `popularity`, `hit_score` components, full-history aggregates) never appear in the feature matrix — it caught two slips during development.
+
 ## Why It Matters
 
 - Movie success depends on trends, audience preferences, market conditions

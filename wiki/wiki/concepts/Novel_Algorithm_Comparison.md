@@ -48,8 +48,33 @@ Full comparison of 11 algorithms researched. Decision: FT-Transformer (D001).
 
 **Why not ExcelFormer/TabPFN:**
 - Less established, fewer citations
-- TabPFN designed for small datasets (<10K samples)
+- ~~TabPFN designed for small datasets (<10K samples)~~ **Superseded**: TabPFN-2.5 (Feb 2026) handles up to 50K rows / 2K features = exactly our 47K×76 regime
 - Good to mention as "future directions"
+
+## Empirical Results (Day 2, 2026-10-22) — implemented 3
+
+| Model | ROC-AUC | PR-AUC | F1 | Precision | Recall | Fit time |
+|---|---|---|---|---|---|---|
+| XGBoost (baseline) | **0.865** | 0.368 | 0.402 | 0.366 | 0.446 | 4s |
+| FT-Transformer (novel, D001) | 0.863 | **0.379** | **0.406** | 0.355 | **0.475** | 72 min |
+| Logistic Regression (floor) | 0.857 | 0.340 | 0.398 | 0.358 | 0.448 | 1s |
+
+FT-T and XGB statistically tied on ROC-AUC; FT-T leads PR-AUC/F1/recall (the metrics that matter at 8% base rate). This matches theory: Grinsztajn 2022 + Gorishniy 2021 ("competitive with GBDTs", not superior) on medium tabular data with engineered aggregates. LR at 0.857 shows the feature set is nearly linearly separable — only 0.008 AUC of interaction signal available to anyone.
+
+## 2025-26 Landscape Update (researched 2026-10-22)
+
+The field moved past "FT-T vs GBDT" to **tabular foundation models (TFMs)**:
+
+| Model | Venue/Date | Status vs GBDT | Fit for our regime (47K×76) | Notes |
+|---|---|---|---|---|
+| **TabPFN-2.5** | arXiv 2511.08667 (Feb 2026) | **Beats tuned XGB/LGB/Cat** on TabArena; 87% win rate vs default XGB up to 100K rows | **Designed for it** (≤50K rows, ≤2K features) | In-context learning, no training; distillation engine for deployment |
+| **TabPFN v2** | Nature 2025 | Wins small data (<10K) | Subsample | The NeurIPS'25 CD diagram ranks it above RealMLP, TabM, TabR, FT-T |
+| **RealMLP** (+RealTabR-D) | NeurIPS 2024 | Competitive with tuned GBDTs without HPO | Good | Pre-tuned defaults "bag of tricks"; also improved XGB/LGB/Cat defaults |
+| **TabM** | 2025 | Strong 2nd tier | Good | Parallel multi-prediction nets |
+| **TabICL / TabDPT / Mitra / LimiX** | 2025-26 | TFM wave | Varies | Cite as landscape |
+| **TabR** | ICLR 2024 | Often wins among parametric DL | Good, expensive | Retrieval: "find films like this one" — thematically perfect for movies |
+
+**Decision (D026)**: FT-Transformer stays the motivated novel algorithm (theory depth, implemented end-to-end). **TabPFN-2.5 is the one time-boxed experiment after slides** (inference-only, no training loop). TabR/RealMLP/TabM go on the future-work slide with citations.
 
 ## Interview Narrative
 

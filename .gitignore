@@ -5,6 +5,11 @@ source_data/
 data/
 reports/figures/
 
+# Model training artifacts (regenerable via src/train.py)
+saved_models/
+lightning_logs/
+.pt_tmp/
+
 # Virtual environment
 .venv/
 
