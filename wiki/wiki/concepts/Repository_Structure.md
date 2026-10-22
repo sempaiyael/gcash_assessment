@@ -52,14 +52,14 @@ gcash_assessment/
 │   │   ├── baselines.py            # LR, XGBoost, TabNet
 │   │   └── recommender.py          # KNN, SVD++ (bonus)
 │   └── evaluation.py               # Metrics + visualization
-├── slides/
-│   ├── images/                     # EDA charts, model results
+├── slides/                         # Presentation deliverables (emailed, gitignored)
 │   ├── AAA_Title_Presentation.pptx # Studio exec presentation
-│   └── Recommender_Presentation.pptx # Streaming exec (bonus)
+│   ├── Recommender_Presentation.pptx # Streaming exec (bonus)
+│   └── images/                     # Charts used in the decks
 ├── reports/
 │   └── figures/                    # Generated figures (NOT in repo)
 └── wiki/                           # Knowledge base & decision log (IN repo)
-    ├── CLAUDE.md                   # Session startup protocol
+    ├── Knowledge_Base.md           # Session checklist and project state
     ├── log/                        # Daily activity logs
     ├── raw/notes/                  # Project brief
     └── wiki/concepts/              # Decision log, learnings, etc.

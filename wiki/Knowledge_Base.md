@@ -1,7 +1,6 @@
 # GCash Movie Project Knowledge Base
 
-> Schema document — read at the start of every session together with wiki/index.md.
-> Dual purpose: (1) research companion, (2) operational memory for session continuity.
+> Project knowledge base and decision record — review at the start of each working session together with wiki/index.md.
 
 ## Project Context
 
@@ -42,25 +41,15 @@ Covers:
 Excludes:
 - General ML tutorials, subjective film analysis
 
-## Session Startup Protocol
+## Session Checklist
 
-Every new session MUST:
+Each working session should:
 1. Read this file + wiki/index.md
 2. Read Decision Log [[concepts/Decision_Log]]
 3. Read Failures and Learnings [[concepts/Failures_and_Learnings]]
 4. Read Deferred Items [[concepts/Deferred_Items]]
 5. Check log/ for most recent day's activity
-6. **Log any decisions, failures, or learnings from the session before ending**
-
-## Team Roles (Subagent Mapping)
-
-| Role | Subagent Type | When to Use |
-|------|--------------|-------------|
-| Technical Manager | explore | Scope, risk, timeline |
-| Lead Engineer | explore | Architecture, code structure, tradeoffs |
-| Data Scientist | explore | Feature engineering, model selection, evaluation |
-| Research Analyst | explore | Paper reading, algorithm comparison, literature |
-| Code Implementer | main agent | Code, data pipeline, slides |
+6. Log any decisions, failures, or learnings from the session before ending
 
 ## Current Project State
 
@@ -76,9 +65,9 @@ Every new session MUST:
 - **Split**: fit ≤2015 / val 2016-2018 / test 2019-2023 (D022). P90 label = 0.5612 (D016)
 - **Results**: reports/tables/model_comparison.{csv,md}, reports/figures/model_*.png
 - **Precision story**: P@25=0.76 (FT-T, ~10x base rate); 90% precision unreachable (measured) → two-tier slate (D025)
-- **Presentation**: Executive slides for studio management (Day 3 priority)
+- **Presentation**: Studio exec deck in authoring (emailed deliverable — not committed to the repo)
 - **Wiki**: concept + entity pages, 3 day logs, results/precision/landscape documented
-- **Next action**: Day 3 — slides first, then 60-min TabPFN-2.5 experiment (D026), then bonus recommender if time
+- **Next action**: Bonus recommender (MovieLens + SVD++, notebook 05) while the studio deck is authored; TabPFN-2.5 experiment pinned (see Deferred Items)
 
 ## Key Decisions
 
@@ -134,8 +123,9 @@ See [[concepts/Decision_Log]] for full log.
 
 See [[concepts/Deferred_Items]] for full list.
 - ~~TMDb API~~ → Resolved via Kaggle dataset (D007)
-- TabR deep-dive (revisit Day 2 evening)
-- Box Office Mojo scraping (revisit Day 2 if model weak)
+- **TabPFN-2.5 experiment — PINNED** (weights gated behind Prior Labs license at ux.priorlabs.ai; experiment script ready in `gcash_scratch/`). Revisit after the recommender is done.
+- TabR deep-dive (revisit after recommender)
+- Box Office Mojo scraping (not needed — model strong without it)
 - NLP on plot synopses (low priority)
 
 ## Research Gaps
@@ -148,12 +138,11 @@ Sources to ingest:
 - [x] Movie success prediction (Lash & Zhao, 2016) — documented in wiki
 - [ ] IMDb dataset documentation — ingest after download
 
-## Notes for LLM
+## Working Conventions
 
 - Language: English
 - Tone: Technical but accessible
-- Style: Quick-reference cheat sheets; link to deeper references
-- Token budget: Be efficient. Dense info over verbose explanations.
+- Format: Quick-reference cheat sheets; link to deeper references
 - Contradictions: State both, cite each, add to Open Questions
 - **Always check Deferred Items before new research**
 - **Always log failures/learnings — prevents repeating mistakes**
