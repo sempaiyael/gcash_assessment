@@ -21,7 +21,7 @@ Items intentionally skipped. Check before starting new research.
 ## Algorithm Research
 
 - [ ] **TabPFN-2.5 experiment — PINNED** (2026-10-22)
-  - State: experiment script complete (`gcash_scratch/tabpfn_experiment.py`); blocked on Prior Labs license acceptance (weights gated at ux.priorlabs.ai, `TABPFN_TOKEN` auth)
+  - State: experiment script complete and preserved locally (outside version control); blocked on Prior Labs license acceptance (weights gated at ux.priorlabs.ai, `TABPFN_TOKEN` auth)
   - Revisit: after the bonus recommender is delivered
   - Why it matters: Feb-2026 SOTA for our data regime (≤50K rows); would add a leaderboard row + landscape credibility
 - [ ] **TabR deep-dive** — ICLR 2024 paper, retrieval mechanism

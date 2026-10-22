@@ -221,6 +221,6 @@ Chronological record of key project decisions. Reference IDs (D001, D002...) for
 
 ## D028: TabPFN-2.5 Pinned — Recommender Prioritized
 - **Date**: 2026-10-22
-- **Decision**: Pin the TabPFN-2.5 experiment (blocked on Prior Labs license acceptance for model weights) and deliver the bonus recommender instead. Script preserved in `gcash_scratch/`.
+- **Decision**: Pin the TabPFN-2.5 experiment (blocked on Prior Labs license acceptance for model weights) and deliver the bonus recommender instead. Experiment script preserved locally outside version control.
 - **Rationale**: User preference; recommender is an exam bonus deliverable with clear value, while TabPFN requires an external account action and is a "nice-to-have" leaderboard row.
 - **Status**: Accepted — revisit per Deferred_Items

@@ -37,7 +37,7 @@ Background, skills, and constraints for the project owner. Use this to calibrate
 
 ## Constraints
 
-- **Token budget**: Be efficient with LLM usage. Dense info over verbose explanations.
+- **Style**: Be efficient. Dense info over verbose explanations.
 - **Time**: Aggressive scope, need to prioritize high-impact work
 - **Recommender**: No experience — rely on surprise library documentation and wiki
 

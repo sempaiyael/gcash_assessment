@@ -7,6 +7,10 @@
 
 ## Concepts
 
+### Overview
+- [[concepts/System_Overview]] — architecture, pipelines, run commands, artifact map
+- [[concepts/Results_Summary]] — every headline number in one place
+
 ### Project Management
 - [[concepts/Decision_Log]] — Key decisions with rationale and tradeoffs
 - [[concepts/Failures_and_Learnings]] — Mistakes, issues, lessons learned

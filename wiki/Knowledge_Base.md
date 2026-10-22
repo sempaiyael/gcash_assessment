@@ -68,7 +68,7 @@ Each working session should:
 - **Presentation**: Studio exec deck in authoring (emailed deliverable — not committed to the repo)
 - **Bonus**: MovieLens recommender DONE — SVD/SVD++/KNN on ml-25m, temporal eval (D027); SVD-full RMSE 0.804, NDCG@10 0.543
 - **Wiki**: concept + entity pages, 3 day logs, results/precision/landscape documented
-- **Next action**: Studio + streaming decks in authoring (owner-authored); assistant available for slide content support; TabPFN-2.5 pinned (Deferred Items)
+- **Next action**: Studio + streaming decks in authoring (owner-authored; content reviewed against the analysis); TabPFN-2.5 pinned (Deferred Items)
 
 ## Key Decisions
 
@@ -124,7 +124,7 @@ See [[concepts/Decision_Log]] for full log.
 
 See [[concepts/Deferred_Items]] for full list.
 - ~~TMDb API~~ → Resolved via Kaggle dataset (D007)
-- **TabPFN-2.5 experiment — PINNED** (weights gated behind Prior Labs license at ux.priorlabs.ai; experiment script ready in `gcash_scratch/`). Revisit after the recommender is done.
+- **TabPFN-2.5 experiment — PINNED** (weights gated behind Prior Labs license at ux.priorlabs.ai; experiment script preserved locally outside version control). Revisit after the recommender is done.
 - TabR deep-dive (revisit after recommender)
 - Box Office Mojo scraping (not needed — model strong without it)
 - NLP on plot synopses (low priority)
