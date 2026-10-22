@@ -1,0 +1,4 @@
+model,P@25,P@50,P@100,P@250
+FT-Transformer,0.76,0.74,0.67,0.552
+XGBoost,0.64,0.64,0.6,0.544
+Logistic Regression,0.52,0.56,0.49,0.508

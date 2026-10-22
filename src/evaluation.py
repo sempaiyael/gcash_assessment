@@ -184,3 +184,49 @@ def save_comparison(evals: list[dict], out_csv: Path) -> pd.DataFrame:
     md = comparison.to_markdown(index=False, floatfmt=".3f")
     out_csv.with_suffix(".md").write_text(md, encoding="utf-8")
     return comparison
+
+
+def precision_at_k(y_true: np.ndarray, y_proba: np.ndarray, ks: list[int]) -> dict[int, float]:
+    """Precision among the top-K scored items — the greenlight-slate metric (D025).
+
+    At an 8% base rate, P@K is the business-facing form of precision: 'of the
+    films we endorse, how many are actually hits?'
+    """
+    order = np.argsort(-y_proba)
+    return {k: float(y_true[order[:k]].mean()) for k in ks}
+
+
+def plot_precision_at_k(
+    results: dict[str, tuple[np.ndarray, np.ndarray]],
+    out_fig: Path,
+    out_csv: Path,
+) -> pd.DataFrame:
+    """Slate-precision curves + P@K table (D025: two-tier greenlight framing).
+
+    results: name -> (y_true, y_proba) on the test split.
+    """
+    fig, ax = plt.subplots(figsize=(8, 5))
+    rows = []
+    ks_curve = np.unique(np.round(np.logspace(np.log10(10), np.log10(3000), 40)).astype(int))
+    for name, (y, p) in results.items():
+        order = np.argsort(-p)
+        ax.plot(ks_curve, [y[order[:k]].mean() for k in ks_curve], lw=2.2, label=name)
+        row = {"model": name}
+        row.update({f"P@{k}": round(v, 3) for k, v in precision_at_k(y, p, [25, 50, 100, 250]).items()})
+        rows.append(row)
+    base = results[next(iter(results))][0].mean()
+    ax.axhline(base, color="k", ls="--", lw=1, label=f"base rate ({base:.0%})")
+    ax.set_xscale("log")
+    ax.set_xlabel("Slate size (top-K picks by model score)")
+    ax.set_ylabel("Precision@K  (share of picks that are hits)")
+    ax.set_title("Greenlight slate precision — top-K picks, test 2019-2023")
+    ax.grid(alpha=0.3)
+    ax.legend(loc="upper right")
+    fig.tight_layout()
+    out_fig.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_fig, dpi=150)
+    plt.close(fig)
+    table = pd.DataFrame(rows)
+    out_csv.parent.mkdir(parents=True, exist_ok=True)
+    table.to_csv(out_csv, index=False)
+    return table

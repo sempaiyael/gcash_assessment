@@ -10,6 +10,9 @@ saved_models/
 lightning_logs/
 .pt_tmp/
 
+# Presentation drafts (emailed deliverable - authored outside the repo)
+slides/
+
 # Virtual environment
 .venv/
 
