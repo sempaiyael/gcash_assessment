@@ -101,6 +101,18 @@ Real-time record of mistakes and lessons. Prevents repeating errors across sessi
 - **Impact**: No result impact (model completed and beat LR), but timeline risk.
 - **Lesson**: Extrapolate by **batches/epoch × epoch count**, and include at least one FULL-size epoch in the gauge (e.g., 1 epoch on 100%) before committing. For refits: batch_size 1024 + `num_workers` or `max_epochs=25` caps cost.
 
+### F013: SVD++ Gauge Mis-Extrapolation — Quadratic-in-History Cost
+- **What**: SVD++ gauge (5% rating sample) extrapolated to ~28 min full run; reality = hours (60-min timeout killed a run with no result).
+- **Root cause**: surprise's SVD++ updates implicit y-factors for every item in a user's history **on every rating** — cost is O(Σ_u |I_u|²·f). A random rating-sample shrinks per-user histories 20x, making per-rating cost ~20x cheaper in the gauge than in production. Second instance of F012's lesson: cost is not linear in row count.
+- **Impact**: ~60 min lost to one killed run. Fixed by restructuring: SVD++ on a 5K warm-user cohort with histories intact + plain SVD (O(|R|·f)) on full data.
+- **Lesson**: Before gauging an algorithm, write down its complexity class and what the sample changes. **Sample users-with-full-histories, not rows**, whenever per-row cost depends on group size. Also: run Python with line buffering (`sys.stdout.reconfigure(line_buffering=True)`) so timeouts keep the logs.
+
+### F014: Cohort Sampling Design Determines Ranking-Metric Size
+- **What**: First full recommender run reported ranking metrics over 230 users; expected ~5,000.
+- **Root cause**: Cohort sampled uniformly from train users — but only 6,492 of 150K train users are "warm" (appear in the future test window), so the cohort ∩ evaluable ≈ 230.
+- **Impact**: Results usable but under-powered; re-run with warm-user cohort (4,814 eval users) cost ~55 min.
+- **Lesson**: When evaluation requires users in both splits, sample the cohort from the intersection — uniform sampling of the wrong population silently shrinks your eval set. Always print n_eval alongside metrics.
+
 ## Known Pitfalls (Pre-mortem + Validated)
 
 | Pitfall | Prevention | Status |

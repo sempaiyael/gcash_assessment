@@ -66,8 +66,9 @@ Each working session should:
 - **Results**: reports/tables/model_comparison.{csv,md}, reports/figures/model_*.png
 - **Precision story**: P@25=0.76 (FT-T, ~10x base rate); 90% precision unreachable (measured) → two-tier slate (D025)
 - **Presentation**: Studio exec deck in authoring (emailed deliverable — not committed to the repo)
+- **Bonus**: MovieLens recommender DONE — SVD/SVD++/KNN on ml-25m, temporal eval (D027); SVD-full RMSE 0.804, NDCG@10 0.543
 - **Wiki**: concept + entity pages, 3 day logs, results/precision/landscape documented
-- **Next action**: Bonus recommender (MovieLens + SVD++, notebook 05) while the studio deck is authored; TabPFN-2.5 experiment pinned (see Deferred Items)
+- **Next action**: Studio + streaming decks in authoring (owner-authored); assistant available for slide content support; TabPFN-2.5 pinned (Deferred Items)
 
 ## Key Decisions
 

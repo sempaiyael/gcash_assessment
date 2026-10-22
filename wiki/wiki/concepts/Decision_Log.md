@@ -211,4 +211,16 @@ Chronological record of key project decisions. Reference IDs (D001, D002...) for
 - **Date**: 2026-10-22
 - **Decision**: Day-3 sequence: (1) executive slides, (2) 60-min TabPFN-2.5 experiment (skip without ceremony if slides slip), (3) recommender only if both done. FT-Transformer remains the motivated novel algorithm regardless of TabPFN outcome.
 - **Rationale**: Deadline 2026-10-23 with buffer (user is a day ahead of the original 3-day plan); slides are the graded deliverable. TabPFN-2.5 (arXiv 2511.08667, Feb 2026) is the one model category that consistently beats tuned GBDTs on our data regime (≤50K rows) and is inference-only (no training loop) — high story value per minute. TabR/RealMLP/TabM stay as cited future work.
+- **Status**: Superseded in sequence by D028 (TabPFN pinned → recommender prioritized); experiment itself remains planned.
+
+## D027: Recommender Protocol — Temporal Split, Warm-User Eval, SVD++ Cohort
+- **Date**: 2026-10-22
+- **Decision**: MovieLens ml-25m (25M ratings): temporal 90/10 split by timestamp; item support filter ≥200 train ratings (D010 philosophy, keeps 96.7% of ratings); evaluate on warm users only (user + item in train) with coverage reported; ranking via sampled-candidate protocol (relevant = test rating ≥4.0 vs 100 distractors). SVD++ trained on a 5K warm-user cohort (all histories intact); plain SVD scales to the full 21.8M training ratings.
+- **Rationale**: Temporal split keeps the no-leakage narrative (D017/D022). SVD++ in surprise costs O(Σ_u |I_u|²·f) — quadratic in user history — making full-data training hours/epoch (F013); a rating-sample gauge understates this because it shortens histories. Cohort-with-full-histories is the honest compromise; SVD-full covers scale.
 - **Status**: Accepted
+
+## D028: TabPFN-2.5 Pinned — Recommender Prioritized
+- **Date**: 2026-10-22
+- **Decision**: Pin the TabPFN-2.5 experiment (blocked on Prior Labs license acceptance for model weights) and deliver the bonus recommender instead. Script preserved in `gcash_scratch/`.
+- **Rationale**: User preference; recommender is an exam bonus deliverable with clear value, while TabPFN requires an external account action and is a "nice-to-have" leaderboard row.
+- **Status**: Accepted — revisit per Deferred_Items

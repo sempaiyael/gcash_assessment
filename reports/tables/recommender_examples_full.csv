@@ -1,0 +1,51 @@
+userId,rank,movieId,title,score
+126422,1,1203,12 Angry Men (1957),4.188
+126422,2,26587,"Decalogue, The (Dekalog) (1989)",4.081
+126422,3,6104,Monty Python Live at the Hollywood Bowl (1982),4.015
+126422,4,1209,Once Upon a Time in the West (C'era una volta il West) (1968),3.997
+126422,5,904,Rear Window (1954),3.993
+126422,6,152970,Hunt for the Wilderpeople (2016),3.976
+126422,7,7156,"Fog of War: Eleven Lessons from the Life of Robert S. McNamara, The (2003)",3.952
+126422,8,3134,Grand Illusion (La grande illusion) (1937),3.943
+126422,9,27834,"Return, The (Vozvrashcheniye) (2003)",3.929
+126422,10,1732,"Big Lebowski, The (1998)",3.928
+70401,1,7560,Fail-Safe (1964),4.171
+70401,2,93040,"Civil War, The (1990)",4.139
+70401,3,74727,Gentlemen of Fortune (Dzhentlmeny udachi) (1972),4.034
+70401,4,946,To Be or Not to Be (1942),3.987
+70401,5,3088,Harvey (1950),3.967
+70401,6,26064,"Bad Sleep Well, The (Warui yatsu hodo yoku nemuru) (1960)",3.96
+70401,7,4432,Sweet Smell of Success (1957),3.952
+70401,8,3546,What Ever Happened to Baby Jane? (1962),3.949
+70401,9,69529,Home (2009),3.932
+70401,10,4998,"Defiant Ones, The (1958)",3.918
+105935,1,171011,Planet Earth II (2016),4.324
+105935,2,7937,"Silence, The (Tystnaden) (1963)",4.048
+105935,3,1172,Cinema Paradiso (Nuovo cinema Paradiso) (1989),4.02
+105935,4,38159,"Short Film About Love, A (Krótki film o milosci) (1988)",3.959
+105935,5,86345,Louis C.K.: Hilarious (2010),3.86
+105935,6,1069,"Murder, My Sweet (1944)",3.845
+105935,7,2502,Office Space (1999),3.841
+105935,8,741,Ghost in the Shell (Kôkaku kidôtai) (1995),3.824
+105935,9,2951,"Fistful of Dollars, A (Per un pugno di dollari) (1964)",3.821
+105935,10,163134,Your Name. (2016),3.801
+15208,1,1221,"Godfather: Part II, The (1974)",4.351
+15208,2,89759,"Separation, A (Jodaeiye Nader az Simin) (2011)",4.322
+15208,3,1260,M (1931),4.262
+15208,4,7566,28 Up (1985),4.255
+15208,5,2936,Sullivan's Travels (1941),4.249
+15208,6,76111,About Elly (Darbareye Elly) (2009),4.232
+15208,7,65188,Dear Zachary: A Letter to a Son About His Father (2008),4.225
+15208,8,148881,World of Tomorrow (2015),4.203
+15208,9,6724,Paper Moon (1973),4.167
+15208,10,17,Sense and Sensibility (1995),4.156
+69490,1,64701,I've Loved You So Long (Il y a longtemps que je t'aime) (2008),4.404
+69490,2,38304,No Direction Home: Bob Dylan (2005),4.404
+69490,3,947,My Man Godfrey (1936),4.396
+69490,4,107883,The Lunchbox (2013),4.39
+69490,5,36363,Kin-Dza-Dza! (1986),4.372
+69490,6,59387,"Fall, The (2006)",4.349
+69490,7,7937,"Silence, The (Tystnaden) (1963)",4.325
+69490,8,152970,Hunt for the Wilderpeople (2016),4.317
+69490,9,26939,Drifting Clouds (Kauas pilvet karkaavat) (1996),4.299
+69490,10,84952,Confessions (Kokuhaku) (2010),4.288
