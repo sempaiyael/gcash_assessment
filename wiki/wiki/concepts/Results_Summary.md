@@ -30,7 +30,7 @@ Every headline number in one place. Test sets were held out **temporally** — t
 | FT-Transformer | 0.863 | **0.379** | **0.406** | 0.355 | **0.475** | 72 min |
 | Logistic Regression | 0.857 | 0.340 | 0.398 | 0.358 | 0.448 | 1 s |
 
-*(thresholds tuned on validation; PR-AUC baseline = 0.08; paired-bootstrap note: 0.865 vs 0.863 is a statistical tie)*
+*(thresholds tuned on validation; PR-AUC baseline = 0.08; paired bootstrap, 2,000 resamples: ΔAUC (FT-T − XGB) = −0.0016, 95% CI [−0.0062, +0.0030] — a statistical tie)*
 
 ## Greenlight Slate — precision@K (D025)
 
@@ -45,7 +45,7 @@ Every headline number in one place. Test sets were held out **temporally** — t
 
 ## Case-Study Slate (test picks by FT-Transformer)
 
-- Right: *Oppenheimer* 0.99, *Once Upon a Time in Hollywood* 0.99, *Avengers: Endgame* 0.98, *Spider-Man: Across the Spider-Verse* 0.96, *Everything Everywhere All at Once* 0.91, *Top Gun: Maverick* 0.87 — 15 of the top 20 are hits
+- Right: *Oppenheimer* 0.99, *Once Upon a Time in... Hollywood* 0.99, *Avengers: Endgame* 0.98, *Spider-Man: Across the Spider-Verse* 0.96, *Everything Everywhere All at Once* 0.91, *Top Gun: Maverick* 0.87 — 17 of the top 20 are hits (XGBoost: 13 of 20)
 - Honest discussion: *Killers of the Flower Moon* 0.98 predicted / label 0 — acclaimed, but the ROI/quality composite says not top-decile
 
 ## What Drives Hits (permutation importance)
@@ -61,7 +61,7 @@ Top features across models: **keyword richness** (disclosed metadata caveat), **
 | SVD++ (5K-user cohort) | 0.832 | 0.615 | 0.354 | 0.448 | 27 min |
 | SVD (cohort) | 0.818 | 0.603 | 0.364 | 0.459 | 13 s |
 
-*(269,110 rating rows · 4,814 users · sampled-candidate ranking protocol, D027)*
+*(269,110 rating rows · 4,814 users · sampled-candidate ranking protocol, D027. Scope note: 0.804 is the cohort RMSE; on all warm users SVD-full is 0.809 over 345,684 rows. Always state the population next to the number.)*
 
 ## Key Findings (the five to remember)
 

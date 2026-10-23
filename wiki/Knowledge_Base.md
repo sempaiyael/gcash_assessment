@@ -53,13 +53,13 @@ Each working session should:
 
 ## Current Project State
 
-- **Phase**: Day 2 complete — features + models done. Ready for Day 3 (slides, polish, submission).
-- **Timeline**: 3 days (Day 1 = 2026-10-20, Deadline = 2026-10-22)
+- **Phase**: Analysis + bonus recommender complete and committed. Decks in authoring (owner); submission + push imminent.
+- **Timeline**: Day 1 = 2026-10-19/20, Day 2 = 2026-10-22, Deadline = 2026-10-23
 - **GitHub**: https://github.com/sempaiyael/gcash_assessment (private, D013)
 - **Package Manager**: UV (pyproject.toml + uv.lock, D012). pandas 2.3.3 pinned <3 (D018), torch 2.14.1+cu130
 - **Primary Model**: FT-Transformer (pytorch-tabular 1.2.0, GPU) — test ROC-AUC 0.863, PR-AUC 0.379 (best)
 - **Baselines**: XGBoost (ROC-AUC 0.865), Logistic Regression (0.857). TabNet dropped (D019)
-- **Bonus Model**: SVD++ recommender (not started — cut first if time tight)
+- **Bonus Model**: MovieLens recommender DONE (D027) — SVD/SVD++/KNN; SVD-full best (RMSE 0.804)
 - **Data**: IMDb TSVs + TMDb Kaggle (D007). Modeling frame: 65,799 movies (2024+ dropped, D021)
 - **Features**: 76 greenlight-time features, as-of leakage-safe (D020) — src/feature_engineering.py
 - **Split**: fit ≤2015 / val 2016-2018 / test 2019-2023 (D022). P90 label = 0.5612 (D016)
@@ -102,6 +102,8 @@ See [[concepts/Decision_Log]] for full log.
 | D024 | FT-T: early stop on valid_loss; permutation importance (lib bugs F008/F011) | 2026-10-22 |
 | D025 | High precision = two-tier P@K slate + recalibration; no 90% threshold chase | 2026-10-22 |
 | D026 | Day 3: slides first, then 60-min TabPFN-2.5 experiment, then recommender | 2026-10-22 |
+| D027 | Recommender protocol: temporal split, warm-user eval, SVD++ cohort, SVD full | 2026-10-22 |
+| D028 | TabPFN-2.5 pinned (license-gated) — recommender prioritized | 2026-10-22 |
 
 ## Naming Conventions
 

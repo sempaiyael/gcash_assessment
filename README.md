@@ -23,8 +23,8 @@
 The `wiki/` directory contains the project's knowledge base and operational memory:
 
 - **`Knowledge_Base.md`** — Session checklist and project context
-- **`wiki/concepts/Decision_Log.md`** — Key decisions with rationale (D001-D026)
-- **`wiki/concepts/Failures_and_Learnings.md`** — Mistakes and lessons (F001-F012)
+- **`wiki/concepts/Decision_Log.md`** — Key decisions with rationale (D001-D028)
+- **`wiki/concepts/Failures_and_Learnings.md`** — Mistakes and lessons (F001-F014)
 - **`wiki/concepts/Execution_Plan.md`** — 3-day timeline with tasks and deliverables
 - **`wiki/concepts/Hit_Movie_Metric.md`** — Composite success index definition
 - **`wiki/concepts/FT_Transformer.md`** — Novel algorithm choice (NeurIPS 2021)
